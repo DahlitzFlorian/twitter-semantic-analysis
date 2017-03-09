@@ -22,6 +22,7 @@ elif "3.3" in version or "3.4" in version:
 # setting up window
 root = Tk("Twitter Semantic Analysis")
 root.title("Twitter Semantic Analysis")
+root.minsize(width=866, height=533)
 
 # run
 root.mainloop()
