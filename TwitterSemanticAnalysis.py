@@ -7,6 +7,9 @@
     -----------------------------------
 """
 import sys
+import subprocess
+import rpy2.robjects as ro
+from rpy2.robjects.packages import importr
 
 # global variables
 version = sys.version
@@ -23,6 +26,10 @@ elif "3.3" in version or "3.4" in version:
 root = Tk("Twitter Semantic Analysis")
 root.title("Twitter Semantic Analysis")
 root.minsize(width=866, height=533)
+
+# running Rscript
+ro.r('setwd("P:/R")')
+ro.r('source("create_bar.R")')
 
 # run
 root.mainloop()
