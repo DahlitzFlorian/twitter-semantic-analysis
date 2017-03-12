@@ -7,9 +7,7 @@
     -----------------------------------
 """
 import sys
-import subprocess
-import rpy2.robjects as ro
-from rpy2.robjects.packages import importr
+from ranalytics import ranalytics
 
 # global variables
 version = sys.version
@@ -27,9 +25,8 @@ root = Tk("Twitter Semantic Analysis")
 root.title("Twitter Semantic Analysis")
 root.minsize(width=866, height=533)
 
-# running Rscript
-ro.r('setwd("P:/R")')
-ro.r('source("create_bar.R")')
+# running Ranalytics
+ranalytics.do_twitter_analysis("AI")
 
 # run
 root.mainloop()
