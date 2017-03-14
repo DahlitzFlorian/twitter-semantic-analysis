@@ -6,34 +6,30 @@
     Twitter API (used w/ R).
     -----------------------------------
 """
-import sys
 import rpy2.robjects as ro
 import os
+from tkinter import *
+from tkinter import filedialog
 
-# global variables
-version = sys.version
 
-# global R functions
-r_source = ro.r["source"]
+class App(Tk):
+    def __init__(self):
+        Tk.__init__(self)
+        self.entry = Entry(self)
+        self.button = Button(self, text="Get", command=self.click_submit)
+        self.button.pack()
+        self.entry.pack()
 
-# importing libs based on Python version
-if "2.7" in version:
-    from Tkinter import *
-    import tkFileDialog as filedialog
-elif "3.3" in version or "3.4" in version:
-    from tkinter import *
-    from tkinter import filedialog
+    def click_submit(self):
+        r_source = ro.r["source"]
+        curr_dir = os.path.dirname(__file__)
+        ranalytics = r_source(curr_dir + "/ranalytics/ranalytics.R")
+        do_analysis = ranalytics[0]
+        do_analysis(self.entry.get(), number=1000)
 
-# setting up window
-root = Tk("Twitter Semantic Analysis")
+root = App()
 root.title("Twitter Semantic Analysis")
 root.minsize(width=866, height=533)
-
-# running Ranalytics
-curr_dir = os.path.dirname(__file__)
-ranalytics = r_source(curr_dir+"/ranalytics/ranalytics.R")
-do_analysis = ranalytics[0]
-do_analysis("AI", number=1000)
 
 # run
 root.mainloop()
