@@ -72,3 +72,5 @@ ENV/
 # IDE
 .idea/
 .httr-oauth
+# log-files
+log/
