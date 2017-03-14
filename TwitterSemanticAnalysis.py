@@ -7,10 +7,14 @@
     -----------------------------------
 """
 import sys
-from ranalytics import ranalytics
+import rpy2.robjects as ro
+import os
 
 # global variables
 version = sys.version
+
+# global R functions
+r_source = ro.r["source"]
 
 # importing libs based on Python version
 if "2.7" in version:
@@ -26,7 +30,10 @@ root.title("Twitter Semantic Analysis")
 root.minsize(width=866, height=533)
 
 # running Ranalytics
-ranalytics.do_twitter_analysis("AI")
+curr_dir = os.path.dirname(__file__)
+ranalytics = r_source(curr_dir+"/ranalytics/ranalytics.R")
+do_analysis = ranalytics[0]
+do_analysis("AI", number=1000)
 
 # run
 root.mainloop()
