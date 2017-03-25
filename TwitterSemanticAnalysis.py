@@ -15,10 +15,16 @@ from tkinter import filedialog
 class App(Tk):
     def __init__(self):
         Tk.__init__(self)
-        self.entry = Entry(self)
+        self.term = Entry(self)
+        self.number = Entry(self)
         self.button = Button(self, text="Get", command=self.click_submit)
+        self.term_label = Label(self, text="Term to search")
+        self.number_label = Label(self, text="Number of tweets")
         self.button.pack()
-        self.entry.pack()
+        self.term_label.pack()
+        self.term.pack()
+        self.number_label.pack()
+        self.number.pack()
 
     def click_submit(self):
         r_source = ro.r["source"]
