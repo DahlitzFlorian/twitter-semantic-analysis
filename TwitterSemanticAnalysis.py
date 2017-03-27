@@ -31,7 +31,7 @@ class App(Tk):
         curr_dir = os.path.dirname(__file__)
         ranalytics = r_source(curr_dir + "/ranalytics/ranalytics.R")
         do_analysis = ranalytics[0]
-        do_analysis(self.entry.get(), number=1000)
+        do_analysis(self.term.get(), number=self.number.get())
 
 root = App()
 root.title("Twitter Semantic Analysis")
