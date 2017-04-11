@@ -74,3 +74,5 @@ ENV/
 .httr-oauth
 # log-files
 log/
+# vscode files
+.vscode/
