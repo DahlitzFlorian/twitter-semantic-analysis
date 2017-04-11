@@ -6,10 +6,11 @@
     Twitter API (used w/ R).
     -----------------------------------
 """
-import rpy2.robjects as ro
+# import rpy2.robjects as ro
 import os
 from tkinter import *
 from tkinter import filedialog
+from analytics.twitterapi import TwitterAPI
 
 
 class App(Tk):
@@ -35,11 +36,11 @@ class App(Tk):
 
     def click_submit(self):
         values = self.check_empty(term=self.term.get(), number=self.number.get())
-        r_source = ro.r["source"]
-        curr_dir = os.path.dirname(__file__)
-        ranalytics = r_source(curr_dir + "/ranalytics/ranalytics.R")
-        do_analysis = ranalytics[0]
-        do_analysis(values[1], number=values[2])
+        twitterapi = TwitterAPI(twitter_consumer_key="bs11GKzJqqfEsyj9iC93ZifGq",
+                                twitter_consumer_secret="9L7A8HIBxttt76JNYIpIWBS0zAJTYncW6gXsW0rbjdloOSEmU0",
+                                twitter_access_token="1367543593-2Uu7ViD5oB2kaI5ryogWaWzUykkQ4A9gExDtTp3",
+                                twitter_access_secret="0DPMZFQyGVgjwrwxzgLJL0S7PqH2pXrZMwEzP6gMl3PSQ")
+        tweets = twitterapi.get_tweets(term=values[1], number=values[2])
 
 root = App()
 root.title("Twitter Semantic Analysis")
