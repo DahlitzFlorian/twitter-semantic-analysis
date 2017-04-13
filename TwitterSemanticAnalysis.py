@@ -11,7 +11,7 @@ from tkinter import *
 from tkinter import filedialog
 from analytics.twitterapi import TwitterAPI
 from analytics.scoring import scoring
-import matplotlib
+import matplotlib.pyplot as plt
 
 
 class App(Tk):
@@ -70,6 +70,23 @@ class App(Tk):
         
         # scoring each tweet
         scored_tweets = scoring(tweets_text)
+
+        # list of all scoring values
+        score_values = list(scored_tweets.values())
+
+        # provide unique and sorted elements
+        value_set = list(set(score_values))
+
+        # setting up data for matplotlib
+        x_axis = []
+        y_axis = []
+        for value in value_set:
+            x_axis.append(value)
+            y_axis.append(score_values.count(value))
+        
+        # show graph
+        plt.bar(x_axis, y_axis, 1/2, color="blue", align="center")
+        plt.show()
 
 # setting up the application
 root = App()
