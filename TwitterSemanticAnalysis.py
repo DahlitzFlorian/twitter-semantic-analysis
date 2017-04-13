@@ -6,11 +6,12 @@
     Twitter API (used w/ R).
     -----------------------------------
 """
-# import rpy2.robjects as ro
 import os
 from tkinter import *
 from tkinter import filedialog
 from analytics.twitterapi import TwitterAPI
+from analytics.scoring import scoring
+import matplotlib
 
 
 class App(Tk):
@@ -61,6 +62,14 @@ class App(Tk):
                                 twitter_access_token="1367543593-2Uu7ViD5oB2kaI5ryogWaWzUykkQ4A9gExDtTp3",
                                 twitter_access_secret="0DPMZFQyGVgjwrwxzgLJL0S7PqH2pXrZMwEzP6gMl3PSQ")
         tweets = twitterapi.get_tweets(term=values[1], number=values[2])
+
+        # extracting the tweets text
+        tweets_text = []
+        for tweet in tweets:
+            tweets_text.append(tweet.text)
+        
+        # scoring each tweet
+        scored_tweets = scoring(tweets_text)
 
 # setting up the application
 root = App()
