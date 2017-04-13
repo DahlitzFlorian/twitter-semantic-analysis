@@ -40,10 +40,10 @@ class TwitterAPI:
                                     access_token_secret=self.twitter_access_secret)
     
 
-    def get_tweets(self, term="Twitter", number=100, until=None, since=None):
+    def get_tweets(self, term="Twitter", number=100, until=None, since=None, lang="en"):
         """Getting tweets 
 
             Returns a number of tweets to a given term based on the 
             parameters.
         """
-        return self.twitter_api.GetSearch(term=term, count=number, until=until, since=since)
+        return self.twitter_api.GetSearch(term=term, count=number, until=until, since=since, lang=lang)
